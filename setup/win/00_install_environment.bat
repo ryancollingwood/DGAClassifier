@@ -1,3 +1,5 @@
+virtualenv .venv
 CALL .venv/Scripts/activate.bat
-jupyter kernelspec uninstall domain_generation_algorithm_classifier
+pip install pandas numpy sklearn scipy jupyter matplotlib unidecode
 ipython kernel install --user --name=domain_generation_algorithm_classifier
+
