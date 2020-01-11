@@ -1,0 +1,1 @@
+pytest integrationtests --capture=no

@@ -14,7 +14,7 @@ def test_can_call_load_data():
 
 def test_load_data_returns_dataframe():
     from src.data import load_data
-    result = load_data("tests/data/mock_data.csv")
+    result = load_data("unittests/data/mock_data.csv")
 
     try:
         assert(isinstance(result, pd.DataFrame))
@@ -24,7 +24,7 @@ def test_load_data_returns_dataframe():
 
 def test_load_data_subset_pass():
     from src.data import load_data
-    result = load_data("tests/data/mock_data.csv", ["number"])
+    result = load_data("unittests/data/mock_data.csv", ["number"])
 
     try:
         assert(list(result.columns) == ["number"])
