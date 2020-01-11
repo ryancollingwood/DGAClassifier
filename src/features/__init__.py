@@ -4,8 +4,10 @@ from .character_count import count_column_characters_in_list
 from .character_distance_left_right import character_distance_left_right
 from .character_distance_left_right import vowel_distance_ratio_left_right_in_column
 from .character_distance_left_right import vowel_mode_distance_left_right_in_column
+from .character_distance_left_right import character_distance_left_right_ratio
 from .character_ratio import ratio_of_characters_in_list
 from .character_windows import binarize_character_pairs_in_column_as_df
 from .character_windows import count_character_pairs_in_column_as_df
 from .length import length
 from .window import window
+from .mode import mode
