@@ -1,8 +1,8 @@
 from typing import List
 import numpy as np
 import pandas as pd
-from ..pipeline import DataFrameColumnTransformer
-from .column import normalise_text_column
+from src.pipeline import DataFrameColumnTransformer
+from src.preprocessing.column import normalise_text_column
 
 
 class NormaliseTextColumnsTransformer(DataFrameColumnTransformer):
