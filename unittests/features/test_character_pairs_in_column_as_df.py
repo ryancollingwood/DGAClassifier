@@ -32,7 +32,9 @@ def test_character_pairs_in_column_as_df_pass():
 
     result = binarize_character_pairs_in_column_as_df(input_series)
     try:
-        assert(result.equals(expected_output))
+        pd.testing.assert_frame_equal(
+            result, expected_output, check_dtype=False
+        )
     except AssertionError:
         pytest.fail("binarize_character_pairs_in_column_as_df did not return expected values")
 
@@ -52,7 +54,9 @@ def test_character_pairs_in_column_as_df_with_subset_pass():
 
     result = binarize_character_pairs_in_column_as_df(input_series, prefix ="", subset_to_pairs = ["bo", "zz"])
     try:
-        assert(result.equals(expected_output))
+        pd.testing.assert_frame_equal(
+            result, expected_output, check_dtype=False
+        )
     except AssertionError:
         pytest.fail("binarize_character_pairs_in_column_as_df did not return expected values")
 
@@ -76,7 +80,9 @@ def test_character_pairs_in_column_as_df_with_prefix_pass():
 
     result = binarize_character_pairs_in_column_as_df(input_series, "z")
     try:
-        assert(result.equals(expected_output))
+        pd.testing.assert_frame_equal(
+            result, expected_output, check_dtype=False
+        )
     except AssertionError:
         pytest.fail("binarize_character_pairs_in_column_as_df did not return expected values")
 
@@ -95,7 +101,9 @@ def test_character_pairs_in_column_as_df_with_prefix_and_subset_pass():
 
     result = binarize_character_pairs_in_column_as_df(input_series, "z", ["bo"])
     try:
-        assert(result.equals(expected_output))
+        pd.testing.assert_frame_equal(
+            result, expected_output, check_dtype = False
+        )
     except AssertionError:
         pytest.fail("binarize_character_pairs_in_column_as_df did not return expected values")
 
