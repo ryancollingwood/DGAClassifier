@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from src.build import train_model
+from src.model import train_model
 import os.path
 
 
