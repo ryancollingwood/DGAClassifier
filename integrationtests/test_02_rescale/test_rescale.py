@@ -2,10 +2,16 @@ import pytest
 import pandas as pd
 import numpy as np
 from sklearn.pipeline import Pipeline
-from src.pipeline import pipeline_step_rescale
+from src.pipeline.steps import rescale
 
 
 def test_rescale():
+    """
+    Verify our generated features rescale as we expect
+
+    :return:
+    """
+
     print("\ntest_rescale")
 
     test_data_path = "integrationtests/test_feature_generation_expected.csv"
@@ -14,7 +20,7 @@ def test_rescale():
     in_data_df = pd.read_csv(test_data_path)
 
     pipeline = Pipeline([
-        pipeline_step_rescale()
+        rescale()
     ])
 
     pipeline_output = pipeline.fit_transform(in_data_df)

@@ -2,10 +2,15 @@ import pytest
 import pandas as pd
 import numpy as np
 from sklearn.pipeline import Pipeline
-from src.pipeline import pipeline_step_feature_generation
+from src.pipeline.steps import feature_generation
 
 
 def test_feature_generation():
+    """
+    Verify that we generated the expected features after preprocessing
+
+    :return:
+    """
     print("\ntest_feature_generation")
 
     test_data_path = "integrationtests/test_preprocessing_expected.csv"
@@ -14,7 +19,7 @@ def test_feature_generation():
     in_data_df = pd.read_csv(test_data_path)
 
     pipeline = Pipeline([
-        pipeline_step_feature_generation()
+        feature_generation()
     ])
 
     pipeline_output = pipeline.transform(in_data_df[["domain_normed"]])

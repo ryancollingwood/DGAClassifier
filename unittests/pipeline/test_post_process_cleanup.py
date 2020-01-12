@@ -5,7 +5,7 @@ import pandas as pd
 def test_can_call_post_process_cleanup():
     import src.pipeline
     try:
-        src.pipeline.post_process_cleanup()
+        src.pipeline.steps.post_process_cleanup()
     except AttributeError:
         pytest.fail("Couldn't call `post_process_cleanup`")
     except Exception:
@@ -13,7 +13,7 @@ def test_can_call_post_process_cleanup():
 
 
 def test_post_process_cleanup():
-    from src.pipeline import post_process_cleanup
+    from src.pipeline.steps import post_process_cleanup
 
     input_df = pd.DataFrame(
         {
@@ -38,7 +38,7 @@ def test_post_process_cleanup():
 
 
 def test_post_process_no_side_effects():
-    from src.pipeline import post_process_cleanup
+    from src.pipeline.steps import post_process_cleanup
 
     input_df = pd.DataFrame(
         {

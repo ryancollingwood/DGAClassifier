@@ -1,7 +1,6 @@
 from typing import Tuple
 import numpy as np
 from sklearn.pipeline import FeatureUnion
-from sklearn.preprocessing import StandardScaler
 
 from src.features.transformer import CharacterVarietyRatioTransformer
 from src.features.transformer import CharacterDistanceLeftRightTransformer
@@ -11,7 +10,7 @@ from src.features.transformer import TextLengthTransformer
 from src.features import mode
 
 
-def pipeline_step_feature_generation() -> Tuple[str, FeatureUnion]:
+def feature_generation() -> Tuple[str, FeatureUnion]:
     """
     After having pre-processed our inputs generate the features we're looking to use.
     This is returned as a FeatureUnion which should allow for parallel processing.

@@ -3,11 +3,16 @@ import numpy as np
 import pytest
 from sklearn.pipeline import Pipeline
 from src.data import load_data
-from src.pipeline import pipeline_step_preprocess
-from src.pipeline import post_process_cleanup
+from src.pipeline.steps import preprocess
+from src.pipeline.steps import post_process_cleanup
 
 
 def test_preprocessing_pipeline():
+    """
+    Verify we can read in and preprocess the data as expected.
+
+    :return:
+    """
     print("\ntest_preprocessing_pipeline")
 
     test_data_path = "integrationtests/test_data.csv"
@@ -16,7 +21,7 @@ def test_preprocessing_pipeline():
     df = load_data(test_data_path, ["domain", "class"])
 
     pipeline = Pipeline([
-        pipeline_step_preprocess(),
+        preprocess(),
     ])
 
     pipeline_output = pipeline.transform(df)

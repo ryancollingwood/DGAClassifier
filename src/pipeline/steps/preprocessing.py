@@ -4,7 +4,7 @@ import numpy as np
 from src.preprocessing import NormaliseTextColumnsTransformer
 
 
-def pipeline_step_preprocess() -> Tuple[str, NormaliseTextColumnsTransformer]:
+def preprocess() -> Tuple[str, NormaliseTextColumnsTransformer]:
     """
     Return a tuple for the step pre-processing step in a Scikit Learn Pipeline
 
