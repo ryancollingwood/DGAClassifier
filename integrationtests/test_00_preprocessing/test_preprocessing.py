@@ -3,7 +3,7 @@ import numpy as np
 import pytest
 from sklearn.pipeline import Pipeline
 from src.data import load_data
-from src.pipeline import  pipeline_step_preprocess
+from src.pipeline import pipeline_step_preprocess
 from src.pipeline import post_process_cleanup
 
 
@@ -45,7 +45,9 @@ def test_preprocessing_pipeline():
     expected_df = pd.read_csv(expected_output_path)
 
     try:
-        assert(result_df.equals(expected_df))
+        pd.testing.assert_frame_equal(
+            result_df, expected_df, check_dtype=False
+        )
     except AssertionError:
         pytest.fail("Data resulting from transformation did not match expected.")
 
