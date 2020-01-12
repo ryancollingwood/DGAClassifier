@@ -8,8 +8,8 @@ from src.pipeline import pipeline_step_feature_generation
 def test_feature_generation():
     print("\ntest_feature_generation")
 
-    test_data_path = "..//test_preprocessing_expected.csv"
-    expected_output_path = "..//test_feature_generation_expected.csv"
+    test_data_path = "../test_preprocessing_expected.csv"
+    expected_output_path = "../test_feature_generation_expected.csv"
 
     in_data_df = pd.read_csv(test_data_path)
 
