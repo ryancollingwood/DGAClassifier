@@ -23,10 +23,15 @@ def post_process_cleanup(df: pd.DataFrame) -> pd.DataFrame:
 
     This will modify the passed in DataFrame
 
-    :param df:
+    :param df: pd.DataFrame or np.ndarray given that this may be called in a pipeline
     :return:
     """
-    result_df = df.copy(True)
+    if isinstance(df, pd.DataFrame):
+        result_df = df.copy(True)
+    elif isinstance(df, np.ndarray):
+        result_df = pd.DataFrame(df, columns=df.dtype.names)
+        print(result_df)
+
     result_df = result_df.replace({"": np.nan}).dropna(how="any")
     result_df = result_df.drop_duplicates()
     return result_df

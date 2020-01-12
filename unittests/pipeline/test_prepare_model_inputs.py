@@ -27,7 +27,7 @@ def test_pipeline_prepare_model_inputs_return_expected_type():
 
     result = pipeline_prepare_model_inputs()
     try:
-        assert(isinstance(result, Pipeline))
+        assert(isinstance(result, list))
     except AssertionError:
-        pytest.fail("`pipeline_prepare_model_inputs` did not return Pipeline")
+        pytest.fail("`pipeline_prepare_model_inputs` did not return List")
 
