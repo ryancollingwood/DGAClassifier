@@ -83,8 +83,6 @@ def test_feature_generation():
     )
 
     expected_df = pd.read_csv(expected_output_path)
-    print(result_df.head())
-    print(expected_df.head())
 
     try:
         pd.testing.assert_frame_equal(
