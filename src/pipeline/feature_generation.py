@@ -12,6 +12,12 @@ from src.features import mode
 
 
 def pipeline_step_feature_generation() -> Tuple[str, FeatureUnion]:
+    """
+    After having pre-processed our inputs generate the features we're looking to use.
+    This is returned as a FeatureUnion which should allow for parallel processing.
+
+    :return: Tuple[str, FeatureUnion]
+    """
     column = "domain_normed"
 
     return (
