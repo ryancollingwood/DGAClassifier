@@ -1,3 +1,4 @@
+import os.path
 from pprint import pprint
 import pandas as pd
 import joblib
@@ -34,8 +35,10 @@ def test_model(filename = "models/trained.model"):
     :param filename:
     :return:
     """
-
-    loaded_model = joblib.load(filename)
+    if os.path.exists(filename):
+        loaded_model = joblib.load(filename)
+    else:
+        raise FileNotFoundError(f"Model not found at {filename}, have you finished model training?")
 
     blind_test = [
         "google",
