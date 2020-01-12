@@ -3,24 +3,20 @@ import numpy as np
 import pytest
 from sklearn.pipeline import Pipeline
 from src.data import load_data
-from src.preprocessing import NormaliseTextColumnsTransformer
+from src.pipeline import  pipeline_step_preprocess
+from src.pipeline import post_process_cleanup
 
 
 def test_preprocessing_pipeline():
     print("\ntest_preprocessing_pipeline")
 
     test_data_path = "integrationtests/test_data.csv"
-    expected_output_path = "integrationtests/test_preprocessing/preprocessed.csv"
+    expected_output_path = "integrationtests/test_preprocessing_expected.csv"
 
     df = load_data(test_data_path, ["domain", "class"])
 
     pipeline = Pipeline([
-        (
-            "preprocess",
-            NormaliseTextColumnsTransformer(
-                "normed", ["domain"],
-            )
-        ),
+        pipeline_step_preprocess(),
     ])
 
     pipeline_output = pipeline.transform(df)
@@ -44,8 +40,9 @@ def test_preprocessing_pipeline():
         columns=column_names
     )
 
-    # need to do the `fillna` as pandas will replace empty strings will np.nan
-    expected_df = pd.read_csv(expected_output_path).fillna('')
+    result_df = post_process_cleanup(result_df)
+
+    expected_df = pd.read_csv(expected_output_path)
 
     try:
         assert(result_df.equals(expected_df))
