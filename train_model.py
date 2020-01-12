@@ -1,4 +1,4 @@
-from src.build import train_model
+from src.model import train_model
 import argparse
 
 if __name__ == "__main__":
