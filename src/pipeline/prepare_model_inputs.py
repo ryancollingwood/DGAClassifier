@@ -11,10 +11,10 @@ from src.pipeline.steps import feature_generation
 from src.pipeline.steps import rescale
 
 
-def pipeline_prepare_model_inputs():
+def pipeline_prepare_model_inputs(columns: List[str]):
 
     return [
-        feature_generation(),
+        feature_generation(columns),
         rescale(),
     ]
 
@@ -74,7 +74,7 @@ def prepare_model_inputs(
     else:
         new_X_cols = x_cols
 
-    pipeline = Pipeline(pipeline_prepare_model_inputs())
+    pipeline = Pipeline(pipeline_prepare_model_inputs(new_X_cols))
 
     X = pipeline.fit_transform(df[new_X_cols], df[y_col])
     y = df[y_col].to_numpy()

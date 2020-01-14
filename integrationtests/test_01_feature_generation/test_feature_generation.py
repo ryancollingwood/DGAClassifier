@@ -19,7 +19,7 @@ def test_feature_generation():
     in_data_df = pd.read_csv(test_data_path)
 
     pipeline = Pipeline([
-        feature_generation()
+        feature_generation(["domain_normed"])
     ])
 
     pipeline_output = pipeline.transform(in_data_df[["domain_normed"]])

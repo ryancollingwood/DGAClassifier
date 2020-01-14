@@ -15,7 +15,7 @@ def test_can_call_pipeline_step_feature_generation():
 def test_pipeline_step_feature_generation_expected_type():
     from src.pipeline.steps import feature_generation
 
-    result = feature_generation()
+    result = feature_generation(["foo"])
     try:
         assert(isinstance(result, tuple))
     except AssertionError:

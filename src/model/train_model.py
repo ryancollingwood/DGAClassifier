@@ -87,6 +87,7 @@ def train_model(
     grid_params = get_grid_search_params()
 
     pipeline = model_grid_search_cv(
+        new_X_columns,
         get_base_estimator(random_state),
         grid_params,
         verbose = verbose,
