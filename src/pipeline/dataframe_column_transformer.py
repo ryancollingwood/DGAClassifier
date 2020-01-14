@@ -5,15 +5,22 @@ from sklearn.base import TransformerMixin, BaseEstimator
 
 
 class DataFrameColumnTransformer(BaseEstimator, TransformerMixin):
-    """
-    Base class for transformer steps to be used in a sklearn pipeline
-    """
 
     def __init__(
             self, column_suffix: str,
             in_columns: List[str],
             **kwargs,
     ):
+        """
+        Base class for transformer steps to be used in a sklearn pipeline
+        which works with Pandas Dataframes as `X` inputs
+
+        :param column_suffix: Non-empty string or `None` if a non-empty string
+            is specified this value will be appended to the column names
+        :param in_columns: which columns of the Dataframe do we want to apply the
+            operation to?
+        :param kwargs:
+        """
         self.in_columns = in_columns
         self.feature_names = None
 
@@ -27,22 +34,27 @@ class DataFrameColumnTransformer(BaseEstimator, TransformerMixin):
         except AssertionError:
             raise ValueError("`in_columns` cannot be empty")
 
-        try:
-            assert(isinstance(column_suffix, str))
-        except AssertionError:
-            raise ValueError("`column_suffix` must be str")
+        if column_suffix:
+            try:
+                assert(isinstance(column_suffix, str))
+            except AssertionError:
+                raise ValueError("`column_suffix` if specified must be str")
 
-        self.column_suffix = column_suffix.strip()
+        if column_suffix:
+            self.column_suffix = column_suffix.strip()
+        else:
+            self.column_suffix = column_suffix
 
         try:
             assert(self.column_suffix != "")
         except AssertionError:
             raise ValueError("`column_suffix` must not be empty string")
 
-        try:
-            assert(self.column_suffix[0] != "_")
-        except AssertionError:
-            raise ValueError("`column_suffix` must not begin with '_'")
+        if column_suffix:
+            try:
+                assert(self.column_suffix[0] != "_")
+            except AssertionError:
+                raise ValueError("`column_suffix` must not begin with '_'")
 
         self.__dict__.update(kwargs)
 
@@ -64,17 +76,27 @@ class DataFrameColumnTransformer(BaseEstimator, TransformerMixin):
 
             df = in_df.copy()
 
+        mutated_columns = list()
+
         for col in self.in_columns:
-            new_column = f"{col}_{self.column_suffix}"
+            if self.column_suffix:
+                new_column = f"{col}_{self.column_suffix}"
+            else:
+                new_column = col
+
 
             transform_result, y = self._transform(df[col], y)
 
             if isinstance(transform_result, pd.Series) or isinstance(transform_result, np.ndarray):
                 df[new_column] = transform_result
+
+                mutated_columns.append(new_column)
             elif isinstance(transform_result, pd.DataFrame):
                 transform_result_columns = [f"{new_column}_{x}" for x in transform_result.columns]
                 transform_result.columns = transform_result_columns
                 before_join_len = len(df)
+
+                mutated_columns += transform_result_columns
 
                 # fillna as we may have dropped rows due to thresh-holding
                 df = df.join(transform_result, how ="left").fillna(0.0)
@@ -83,7 +105,13 @@ class DataFrameColumnTransformer(BaseEstimator, TransformerMixin):
             else:
                 raise ValueError(f"Unknown type {type(transform_result)} return from `_transform`")
 
-            df = df.drop(col, axis = 1)
+            if self.column_suffix:
+                df = df.drop(col, axis = 1)
+
+        non_mutated_columns = [x for x in list(df.columns) if x not in mutated_columns]
+
+        # keep the columns we modified to the right of the dataframe
+        df = df[non_mutated_columns + mutated_columns]
 
         self.feature_names = list(df.columns)
 

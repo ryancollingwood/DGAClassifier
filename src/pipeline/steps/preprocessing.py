@@ -11,7 +11,7 @@ def preprocess() -> Tuple[str, NormaliseTextColumnsTransformer]:
     :return: tuple(str,  NormaliseTextColumnsTransformer)
     """
     return ("preprocess",
-            NormaliseTextColumnsTransformer("normed", ["domain"],)
+            NormaliseTextColumnsTransformer(None, ["domain"],)
             )
 
 

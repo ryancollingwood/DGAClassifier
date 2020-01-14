@@ -29,9 +29,9 @@ def test_preprocessing_pipeline():
     print("column_names", column_names)
 
     try:
-        assert(column_names == ['class', 'domain_normed'])
+        assert(column_names == ['class', 'domain'])
     except AssertionError:
-        pytest.fail("Didn't get the expected `get_feature_names` from pipeline")
+        pytest.fail(f"Didn't get the expected `get_feature_names` from pipeline got {column_names}")
 
     try:
         assert(isinstance(pipeline_output, np.ndarray))

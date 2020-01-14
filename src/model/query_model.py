@@ -11,7 +11,7 @@ class QueryModel:
         if not isinstance(given_value, list):
             given_value = list(given_value)
 
-        predict_df = pd.DataFrame(given_value, columns=["domain_normed"])
+        predict_df = pd.DataFrame(given_value, columns=["input"])
 
         results = self.model.predict(predict_df)
         predict_df["result"] = results

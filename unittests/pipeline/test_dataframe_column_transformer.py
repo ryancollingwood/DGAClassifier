@@ -36,8 +36,8 @@ def test_dataframe_columns_transformer_suffix_type():
     from src.pipeline import DataFrameColumnTransformer
 
     try:
-        with pytest.raises(ValueError, match="`column_suffix` must be str"):
-            assert(DataFrameColumnTransformer(None, list("boo")))
+        with pytest.raises(ValueError, match="if specified must be str"):
+            assert(DataFrameColumnTransformer(1, list("boo")))
     except AssertionError:
         pytest.fail("DataFrameColumnTransformer did not check type of `column_suffix`")
 
@@ -50,6 +50,16 @@ def test_dataframe_columns_transformer_suffix_not_empty():
             assert(DataFrameColumnTransformer("           ", list("boo")))
     except AssertionError:
         pytest.fail("DataFrameColumnTransformer did not check `column_suffix` is not empty")
+
+
+def test_dataframe_columns_transformer_allow_none_suffix():
+    from src.pipeline import DataFrameColumnTransformer
+
+    result = DataFrameColumnTransformer(None, list("boo"))
+    try:
+        assert(result.column_suffix is None)
+    except AssertionError:
+        pytest.fail("DataFrameColumnTransformer did set `column_suffix` to None")
 
 
 def test_dataframe_columns_transformer_suffix_not_begin_underscore():
