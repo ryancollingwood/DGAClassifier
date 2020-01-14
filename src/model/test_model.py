@@ -2,6 +2,7 @@ import os.path
 from pprint import pprint
 import pandas as pd
 import joblib
+from .load_model import load_model
 
 
 def generate_domain(year: int, month: int, day: int) -> str:
@@ -35,10 +36,7 @@ def test_model(filename = "models/trained.model"):
     :param filename:
     :return:
     """
-    if os.path.exists(filename):
-        loaded_model = joblib.load(filename)
-    else:
-        raise FileNotFoundError(f"Model not found at {filename}, have you finished model training?")
+    loaded_model = load_model(filename)
 
     blind_test = [
         "google",
