@@ -23,7 +23,8 @@ def package_model(model_file_path: str, package_name: str):
         'pandas', ' sklearn', ' sklearn.utils.sparsetools._graph_validation',
         'sklearn.utils.sparsetools._graph_tools', 'sklearn.utils.lgamma',
         'sklearn.neighbors._typedefs', 'sklearn.utils._cython_blas',
-        'sklearn.neighbors._quad_tree', 'sklearn.tree._utils'
+        'sklearn.neighbors._quad_tree', 'sklearn.tree._utils',
+        'sklearn.neighbors._typedefs',
     ]
 
     hidden_import_cmd = " ".join([
