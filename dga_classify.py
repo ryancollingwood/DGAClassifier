@@ -18,12 +18,13 @@ if __name__ == "__main__":
     result = None
 
     if args["interactive"]:
+        first_prediction = None
         if given_domain:
             first_prediction = query_model.predict(given_domain)
 
         result = query_model.interactive()
 
-        if given_domain:
+        if given_domain and first_prediction is not None:
             result = result and first_prediction
     else:
         if not given_domain:
