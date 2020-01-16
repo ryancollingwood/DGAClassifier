@@ -6,7 +6,7 @@ This a guide to get you up and running in a Google Cloud Shell.
 
 You may have to alter the permissions of the setup scripts in order for it to be executed.
 
-`sudo chmod setup/linux.sh`
+`sudo chmod +x setup/linux.sh`
 
 Now to execute the setup script.
 
