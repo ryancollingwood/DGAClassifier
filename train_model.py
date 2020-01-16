@@ -16,13 +16,13 @@ if __name__ == "__main__":
     ap.add_argument("-y", "--target_column", required=False,
                     help="Column name for target variable e.g. `class` - default `class`", default="class")
     ap.add_argument("-t", "--test_size", required=False,
-                    help="Ratio of data to holdout for testing e.g. `0.3` for 30% - default `0.3`", default=0.3)
+                    help="Ratio of data to holdout for testing e.g. `0.3` for 30% - default `0.3`", default=0.3, type=float)
     ap.add_argument("-cv", "--cross_validation_folds", required=False,
-                    help="Number of cross validation folds e.g. 10 for 10 Folds - default `5`", default=5)
+                    help="Number of cross validation folds e.g. 10 for 10 Folds - default `5`", default=5, type=int)
     ap.add_argument("-r", "--random_state", required=False,
-                    help="Specify the random state for reproducibility e.g. `42`", default=None)
+                    help="Specify the random state for reproducibility e.g. `42`", default=None, type=int)
     ap.add_argument("-v", "--verbose", required=False,
-                    help="Specify verbosity of training process e.g. `0` for no training updates", default=1)
+                    help="Specify verbosity of training process e.g. `0` for no training updates", default=1, type=int)
 
     args = vars(ap.parse_args())
 
