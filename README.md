@@ -1,5 +1,30 @@
 # DGA Classifier
 
+## Context
+Once malicious software has been installed on a system it needs to be told what to do. To receive instructions the malware needs to communicate with a command and control server. Historically, the domain name of the command and control server was hardcoded into the code of the malware. This made it very easy for cybersecurity professionals to block this communication channel by blacklisting the domain once they discovered it.
+
+To avoid this weakness malware programs have started to use Domain Generating Algorithms (or DGAs). These algorithms generate a number of random domain names where one of the generated domains is the control server. The infected computed scans through these domains trying to contact each, eventually it will try the correct domain. At this stage, the malware can receive instructions remotely.
+
+## Approach
+
+### Exploratory Data Analysis
+First the given data was explored as documented in [EDA Notebook](/blob/master/notebooks/00_DGA_EDA.ipynb).
+, with a view to understand:
+* The nature of the data.
+* Potential required pre-processing steps to sanitize the data.
+* Understanding to what extent the classes of `legit` and `dga` were present and potential scoring measures.
+* Identifying potential features to get generated.
+
+### Feature Generation and Selection
+Once the data was better understood and potential features had been identified pipelines implement the desired transformations were developed.
+Then these pipeline were used to generate different features and their ability to discriminates between the classes was explored. Then feature selection was performed using Principal Component Analysis.
+The process is document in [Feature Generation and Selection Notebook](/blob/master/notebooks/02_Feature_Generation_Selection.ipynb)
+
+### Model Selection
+Finally once suitable features had been identified, then model selection was performed. This was achieved by fitting a number of naive models from a variety of model families.
+Of the model families fitted, Random Forrest was identified as the most suitable.
+This information was then carried forward to training by using a Grid Search Cross Validation pipeline wrapping around the Random Forrest Classifier as documentd in [Model Selecton Notebook](/blob/master/notebooks/03_Model_Selection.ipynb)
+
 ## Installation
 
 It is assumed you have Python 3.6 or above installed.
