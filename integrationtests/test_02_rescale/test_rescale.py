@@ -1,9 +1,10 @@
+import logging
 import pytest
 import pandas as pd
 import numpy as np
 from sklearn.pipeline import Pipeline
 from src.pipeline.steps import rescale
-
+from src.logging import setup_logging
 
 def test_rescale():
     """
@@ -11,11 +12,15 @@ def test_rescale():
 
     :return:
     """
-
-    print("\ntest_rescale")
+    setup_logging(logging.DEBUG)
+    logging.debug("\ntest_rescale")
 
     test_data_path = "integrationtests/test_feature_generation_expected.csv"
     expected_output_path = "integrationtests/test_rescale_expected.csv"
+
+    logging.debug(f"test_data_path: {test_data_path}")
+    logging.debug(f"expected_output_path: {expected_output_path}")
+    logging.debug("Loading test data")
 
     in_data_df = pd.read_csv(test_data_path)
 
@@ -23,20 +28,28 @@ def test_rescale():
         rescale()
     ])
 
+    logging.debug("Applying rescale pipeline")
+
     pipeline_output = pipeline.fit_transform(in_data_df)
 
     try:
         assert(isinstance(pipeline_output, np.ndarray))
     except AssertionError:
-        pytest.fail("`pipeline_output` was not of expected type `np.ndarray`")
+        message = f"`pipeline_output` was not of expected type `np.ndarray`, got: {type(pipeline_output)}"
+        logging.exception(message)
+        pytest.fail(message)
 
     with pytest.raises(AttributeError):
         pipeline["rescale"].get_feature_names()
+
+    logging.debug("Converting pipeline output to DataFrame")
 
     result_df = pd.DataFrame(
         pipeline_output,
         columns=in_data_df.columns
     )
+
+    logging.debug("Loading validation data")
 
     expected_df = pd.read_csv(expected_output_path)
 
@@ -45,4 +58,6 @@ def test_rescale():
             result_df, expected_df, check_dtype=False
         )
     except AssertionError:
-        pytest.fail("Rescaling Pipeline didn't produce expected results")
+        message = "Rescaling Pipeline didn't produce expected results"
+        logging.exception(message)
+        pytest.fail(message)

@@ -1,8 +1,9 @@
+import logging
 import pytest
 import pandas as pd
 import numpy as np
 from src.pipeline import prepare_model_inputs
-
+from src.logging import setup_logging
 
 def test_prepare_model_inputs():
     """
@@ -11,16 +12,24 @@ def test_prepare_model_inputs():
 
     :return:
     """
-    print("\ntest_prepare_model_inputs")
+    setup_logging(logging.DEBUG)
+    logging.debug("test_prepare_model_inputs")
 
     test_data_path = "integrationtests/test_data.csv"
+
+    logging.debug(f"test_data_path: {test_data_path}")
+    logging.debug("Loading test data")
 
     in_data_df = pd.read_csv(test_data_path)
     print(in_data_df.head())
 
+    logging.debug("Splitting into test and train sets by prepare_model_inputs")
+
     feature_names, X_train, X_test, y_train, y_test = prepare_model_inputs(
         in_data_df, ["domain"], "class", test_size = 0.3, random_state_split=42
     )
+
+    logging.debug(f"feature_names: {feature_names}")
 
     expected_feature_names = [
         'digit_ratio__domain_digit_ratio', 'len__domain_len',
@@ -48,42 +57,66 @@ def test_prepare_model_inputs():
         'character_pairs__domain_character_pair_we'
     ]
 
+    logging.debug(f"expected_feature_names: {expected_feature_names}")
+
     try:
         assert(feature_names == expected_feature_names)
     except AssertionError:
-        pytest.fail("`prepare_model_inputs` did not return expected feature names")
+        message = "`prepare_model_inputs` did not return expected feature names"
+        logging.exception(message)
+        pytest.fail(message)
 
-    print(feature_names)
-
+    testing_column = None
     try:
         for x in [X_train, X_test, y_train, y_test]:
+            testing_column = x
             assert(isinstance(x, np.ndarray))
     except AssertionError:
-        pytest.fail("`prepare_model_inputs` didn't return expected types")
+        message = f"`prepare_model_inputs` didn't return expected types, got: {type(testing_column)}"
+        logging.exception(message)
+        pytest.fail(message)
 
-    expected_X_train = np.loadtxt("integrationtests/test_prepare_model_inputs_X_train.csv", delimiter =',', dtype = np.float64)
-    expected_X_test = np.loadtxt("integrationtests/test_prepare_model_inputs_X_test.csv", delimiter =',', dtype = np.float64)
-    expected_y_train = np.loadtxt("integrationtests/test_prepare_model_inputs_y_train.csv", delimiter =',', dtype = str)
-    expected_y_test = np.loadtxt("integrationtests/test_prepare_model_inputs_y_test.csv", delimiter =',', dtype = str)
+    test_prepare_model_inputs_X_train = "integrationtests/test_prepare_model_inputs_X_train.csv"
+    test_prepare_model_inputs_X_test = "integrationtests/test_prepare_model_inputs_X_test.csv"
+    test_prepare_model_inputs_y_train = "integrationtests/test_prepare_model_inputs_y_train.csv"
+    test_prepare_model_inputs_y_test = "integrationtests/test_prepare_model_inputs_y_test.csv"
+
+    logging.debug("Loading validation split data sets")
+    logging.debug(f"test_prepare_model_inputs_X_train: {test_prepare_model_inputs_X_train}")
+    logging.debug(f"test_prepare_model_inputs_X_test: {test_prepare_model_inputs_X_test}")
+    logging.debug(f"test_prepare_model_inputs_y_test: {test_prepare_model_inputs_y_test}")
+
+    expected_X_train = np.loadtxt(test_prepare_model_inputs_X_train, delimiter =',', dtype = np.float64)
+    expected_X_test = np.loadtxt(test_prepare_model_inputs_X_test, delimiter =',', dtype = np.float64)
+    expected_y_train = np.loadtxt(test_prepare_model_inputs_y_train, delimiter =',', dtype = str)
+    expected_y_test = np.loadtxt(test_prepare_model_inputs_y_test, delimiter =',', dtype = str)
 
     try:
         assert(np.all(X_train.ravel() == expected_X_train))
     except AssertionError:
-        pytest.fail("Didn't produce expected `X_train`")
+        message = "Didn't produce expected `X_train`"
+        logging.exception(message)
+        pytest.fail(message)
 
     try:
         assert(np.all(X_test.ravel() == expected_X_test))
     except AssertionError:
-        pytest.fail("Didn't produce expected `X_test`")
+        message = "Didn't produce expected `X_test`"
+        logging.exception(message)
+        pytest.fail(message)
 
     try:
         assert(np.all(y_train.ravel() == expected_y_train))
     except AssertionError:
-        pytest.fail("Didn't produce expected `y_train`")
+        message = "Didn't produce expected `y_train`"
+        logging.exception(message)
+        pytest.fail(message)
 
     try:
         assert(np.all(y_test.ravel() == expected_y_test))
     except AssertionError:
-        pytest.fail("Didn't produce expected `y_test`")
+        message = "Didn't produce expected `y_test`"
+        logging.exception(message)
+        pytest.fail(message)
 
 
