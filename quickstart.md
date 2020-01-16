@@ -2,6 +2,10 @@
 
 This a guide to get you up and running in a Google Cloud Shell.
 
+## Boost Mode
+
+You may want to enable "Boost Mode". To do this click on the `...` button in the top right hand corner of the screen.
+
 # Run Setup
 
 You may have to alter the permissions of the setup scripts in order for it to be executed.
@@ -16,7 +20,7 @@ setup/linux.sh
 ```
 
 # Go get a beverage ☕
-This will take a while as it's doing a couple of things
+This will take a LONG time as it's doing a couple of things, on a very tiny virtual machine.
 
 * Install virtualenv
 * Create a virtualenv `.venv`
