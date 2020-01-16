@@ -165,7 +165,6 @@ class QueryModel:
 
         :return: bool
         """
-        last_result = None
         result = None
 
         in_value = self.get_input()
