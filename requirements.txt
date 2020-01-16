@@ -36,3 +36,5 @@ wcwidth==0.1.8
 whichcraft==0.6.1
 zipp==0.6.0
 notebook
+matplotlib
+seaborn
