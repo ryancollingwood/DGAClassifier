@@ -8,7 +8,7 @@ To avoid this weakness malware programs have started to use Domain Generating Al
 ## Approach
 
 ### Exploratory Data Analysis
-First the given data was explored as documented in [EDA Notebook](/blob/master/notebooks/00_DGA_EDA.ipynb).
+First the given data was explored as documented in [EDA Notebook](/notebooks/00_DGA_EDA.ipynb).
 , with a view to understand:
 * The nature of the data.
 * Potential required pre-processing steps to sanitize the data.
@@ -18,12 +18,12 @@ First the given data was explored as documented in [EDA Notebook](/blob/master/n
 ### Feature Generation and Selection
 Once the data was better understood and potential features had been identified pipelines implement the desired transformations were developed.
 Then these pipeline were used to generate different features and their ability to discriminates between the classes was explored. Then feature selection was performed using Principal Component Analysis.
-The process is document in [Feature Generation and Selection Notebook](/blob/master/notebooks/02_Feature_Generation_Selection.ipynb)
+The process is document in [Feature Generation and Selection Notebook](/notebooks/02_Feature_Generation_Selection.ipynb)
 
 ### Model Selection
 Finally once suitable features had been identified, then model selection was performed. This was achieved by fitting a number of naive models from a variety of model families.
 Of the model families fitted, Random Forrest was identified as the most suitable.
-This information was then carried forward to training by using a Grid Search Cross Validation pipeline wrapping around the Random Forrest Classifier as documentd in [Model Selecton Notebook](/blob/master/notebooks/03_Model_Selection.ipynb)
+This information was then carried forward to training by using a Grid Search Cross Validation pipeline wrapping around the Random Forrest Classifier as documentd in [Model Selecton Notebook](/notebooks/03_Model_Selection.ipynb)
 
 ## Installation
 
