@@ -110,12 +110,18 @@ class QueryModel:
     def get_input(self) -> Dict[str, List]:
         """
         Get input from console and validate it
+        Return None if no input given so we can quit
 
         :return: Dict[str, List]
         """
         given_inputs = dict()
         for column in self.input_columns:
-            given_inputs[column] = input(f"{column}>").strip()
+            current_input = input(f"{column}>").strip()
+
+            if not current_input:
+                return None
+
+            given_inputs[column] = current_input
 
         return self.validate_input(given_inputs, True)
 
@@ -171,12 +177,13 @@ class QueryModel:
 
         while in_value:
             last_result = self.predict(in_value)
-            in_value = self.get_input()
 
             if result is not None:
                 result = result and last_result
             else:
                 result = last_result
+
+            in_value = self.get_input()
 
         return result
 
