@@ -1,12 +1,12 @@
-# Quickstart
+# Quickstart 😎
 
 This a guide to get you up and running in a Google Cloud Shell.
 
-## Boost Mode
+## Boost Mode 📈
 
 You may want to enable "Boost Mode". To do this click on the `...` button in the top right hand corner of the screen.
 
-# Run Setup
+# Run Setup ⚙
 
 You may have to alter the permissions of the setup scripts in order for it to be executed.
 
@@ -19,8 +19,10 @@ Now to execute the setup script.
 setup/linux.sh
 ```
 
-# Go get a beverage ☕
+# Go get a beverage ☕ - Maybe Lunch 🥙
 This will take a LONG time as it's doing a couple of things, on a very tiny virtual machine.
+
+On a boosted Cloud shell it takes ~20 seconds per fit, so with a total of 240 fits thats... 80 minutes. 
 
 * Install virtualenv
 * Create a virtualenv `.venv`
@@ -33,7 +35,7 @@ This will take a LONG time as it's doing a couple of things, on a very tiny virt
 * Runs a simple test of the model
 * Enters an interactive mode where you can query the model
 
-# Ready To Query
+# Ready To Query 🔍
 
 Once all the setup steps are done you'll see a prompt:
 ```
@@ -46,7 +48,7 @@ To quit type in an empty string.
 
 For more details and manual installation go to the next section.
 
-# Training the model
+# Training the model 🎓
 
 ```bash
 python train_model.py -p data/raw/dga_domains.csv -o models
@@ -56,14 +58,14 @@ The model training script expects at least two parameters to be passed in:
 * `-p` for the path to the source data.
 * `-o` where the trained model will be written out.
 
-# Testing the model
+# Testing the model 🐛
 ```bash
 python test_model.py
 ```
 
 Runs a trivial test on the model to ensure it has been built.
 
-# Querying the model
+# Querying the model 🤔
 
 For an interactive session, where you can type in domains
 ````
