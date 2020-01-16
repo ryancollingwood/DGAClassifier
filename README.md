@@ -25,6 +25,13 @@ Finally once suitable features had been identified, then model selection was per
 Of the model families fitted, Random Forrest was identified as the most suitable.
 This information was then carried forward to training by using a Grid Search Cross Validation pipeline wrapping around the Random Forrest Classifier as documentd in [Model Selecton Notebook](/notebooks/03_Model_Selection.ipynb)
 
+# Installation and Overview of Solution
+
+## Run on the Cloud
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/ryancollingwood/DGAClassifier&tutorial=quickstart.md)
+
+All you need is a Google account, run this repo in a light weight temporary cloud session.
+
 ## Installation
 
 It is assumed you have Python 3.6 or above installed.
