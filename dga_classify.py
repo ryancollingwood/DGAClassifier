@@ -2,12 +2,10 @@ import argparse
 import sys
 from src.model import QueryModel
 
-
 if __name__ == "__main__":
     query_model = QueryModel("models/trained.model")
 
     ap = argparse.ArgumentParser()
-    #ap.add_argument("domain", type=str, help="Domain to be tested")
     ap.add_argument("domain", nargs = '*', help="Domain(s) to be test. Either single domain or comma separated")
     ap.add_argument("-i", "--interactive", action='store_true',
                     help="Enter interactive mode to type in many domains")
