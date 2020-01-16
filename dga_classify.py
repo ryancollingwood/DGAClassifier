@@ -3,7 +3,7 @@ import sys
 from src.model import QueryModel
 
 if __name__ == "__main__":
-    query_model = QueryModel("models/trained.model")
+    query_model = QueryModel("models/trained.model", "legit")
 
     ap = argparse.ArgumentParser()
     ap.add_argument("domain", nargs = '*', help="Domain(s) to be test. Either single domain or comma separated")
