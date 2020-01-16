@@ -5,21 +5,6 @@ import logging
 from src.logging import setup_logging
 
 if __name__ == "__main__":
-
-    setup_logging(logging.INFO)
-    logging.info("train_model")
-
-    logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-
-    try:
-        if os.path.isfile("logger.conf"):
-            logging.config.fileConfig(fname='logger.conf', disable_existing_loggers=True)
-            logger = logging.getLogger(__name__)
-    except Exception:
-        logging.warning("Couldn't load `logger.conf` - logging may not perform as expected")
-
-    logging.debug("Parsing arguments")
-
     ap = argparse.ArgumentParser()
     ap.add_argument("-p", "--path", required = True,
                     help="Path to input csv, can be a url - e.g. `data/raw/dga_domains.csv`", default = "data/raw/dga_domains.csv")
@@ -41,11 +26,9 @@ if __name__ == "__main__":
 
     args = vars(ap.parse_args())
 
-    logging.debug("arguments parsed")
-
     log_path = os.path.join(args['output'], "training.log")
-    logging.info(f"Logging training to: {log_path}")
     setup_logging(logging.DEBUG, file_name=log_path)
+    logging.info(f"Logging training to: {log_path}")
 
     train_model(
         args["path"],
