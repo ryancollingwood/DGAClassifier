@@ -1,6 +1,7 @@
 import os.path
 import logging
 import logging.config
+import sys
 
 
 def setup_logging(level = logging.INFO, file_name = None, file_mode = "w"):
@@ -22,6 +23,8 @@ def setup_logging(level = logging.INFO, file_name = None, file_mode = "w"):
             datefmt=datefmt,
             level=level
         )
+
+        logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
 
     if os.path.isfile("logger.conf"):
         logging.debug("Found 'logger.conf'")
