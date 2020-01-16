@@ -198,6 +198,13 @@ Transformations for getting input data into usable state.
 #### `models`
 This is where built models can be stored. This folder is excluded from git.
 
+Once a model has been trained the following files are written to this folder:
+* `report_test.txt` - report of test prediction detailing precision, recall, f1-score.
+* `report_train.txt` - report of training prediction detailing precision, recall, f1-score.
+* `trained.model` - the persisted model.
+* `trained_params.json` - the optimal parameters are found via Cross Validated Grid Search.
+* `training.log` - log file of the training process.
+
 #### `notebooks`
 Documenting the phases of:
 * Exploratory Data Analysis
