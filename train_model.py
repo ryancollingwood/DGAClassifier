@@ -1,8 +1,10 @@
-from src.model import train_model
 import os
+import sys
 import argparse
 import logging
 from src.logging import setup_logging
+from src.model import train_model
+
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
@@ -26,9 +28,17 @@ if __name__ == "__main__":
 
     args = vars(ap.parse_args())
 
+    if not os.path.exists(args['output']):
+        os.makedirs(args['output'])
+
     log_path = os.path.join(args['output'], "training.log")
     setup_logging(logging.DEBUG, file_name=log_path)
-    logging.info(f"Logging training to: {log_path}")
+
+    try:
+        logging.info(f"Logging training to: {log_path}")
+    except FileNotFoundError:
+        print(f"Unable to create log file at {log_path}, do you have the needed file system permissions?")
+        sys.exit(1)
 
     train_model(
         args["path"],
