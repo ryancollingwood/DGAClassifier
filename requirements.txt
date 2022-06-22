@@ -1,5 +1,5 @@
 joblib==0.14.1
-numpy==1.18.1
+numpy==1.22.0
 pandas==0.25.3
 pytest==5.3.2
 pytest-cov==2.8.1
