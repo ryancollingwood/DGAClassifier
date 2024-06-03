@@ -16,6 +16,11 @@ def mode(x: np.array) -> np.float64:
     """
     result = stats.mode(x)
 
+    try:
+        return result.mode
+    except AttributeError:
+        pass
+
     if result[1][0] > 1:
         return result[0][0]
     else:
