@@ -88,6 +88,6 @@ def normalise_text_column(series: pd.Series) -> np.ndarray:
     result = normalise_column_to_lowercase(result)
     result = result.apply(normalise_text_to_ascii)
     result = normalise_column_az_digits_underscores(result)
-    result = normalise_column_empty_and_whitespace(result).replace({"", np.nan})
+    result = normalise_column_empty_and_whitespace(result).replace({"": np.nan})
 
-    return result.values
+    return result.to_numpy()

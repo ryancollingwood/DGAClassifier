@@ -17,7 +17,7 @@ def count_column_characters_in_list(series: pd.Series, looking_for: List[str]) -
     # because we don't trust inputs
     looking_for_as_str = [str(x) for x in looking_for]
 
-    return series.astype(str).apply(lambda x: len([w for w in x if w in looking_for_as_str]))
+    return series.map(str).apply(lambda x: len([w for w in x if w in looking_for_as_str]))
 
 
 def variety_characters(s: str, filter_out: List[str] = None) -> float:

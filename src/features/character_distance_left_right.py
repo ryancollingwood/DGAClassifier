@@ -101,10 +101,10 @@ def get_mode(x: np.array) -> np.float64:
     :param x:
     :return:
     """
-    result = mode(x)
+    result = mode(x, keepdims=False)
 
-    if result[1][0] > 1:
-        return mode(x)[0][0]
+    if result.count > 1:
+        return result.mode
     else:
         # there was no identifiable mode return np.nan
         return np.nan

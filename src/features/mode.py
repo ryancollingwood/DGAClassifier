@@ -14,15 +14,10 @@ def mode(x: np.array) -> np.float64:
     :param x: numpy.array
     :return: np.float64
     """
-    result = stats.mode(x)
+    result = stats.mode(x, keepdims=False)
 
-    try:
+    if result.count > 1:
         return result.mode
-    except AttributeError:
-        pass
-
-    if result[1][0] > 1:
-        return result[0][0]
     else:
         # there was no identifiable mode return np.nan
         return np.nan

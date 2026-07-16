@@ -78,5 +78,3 @@ def test_preprocessing_pipeline():
         message = "Data resulting from transformation did not match expected."
         logging.exception(message)
         pytest.fail(message)
-
-    return pipeline
