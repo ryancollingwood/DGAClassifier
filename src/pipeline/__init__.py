@@ -1,4 +1,5 @@
 from .dataframe_column_transformer import DataFrameColumnTransformer
+from .dataframe_feature_union import DataFrameFeatureUnion
 from .prepare_model_inputs import prepare_model_inputs
 from .prepare_model_inputs import pipeline_prepare_model_inputs
 from .prepare_model_inputs import preprocess_model_inputs

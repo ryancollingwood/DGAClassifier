@@ -122,3 +122,10 @@ class DataFrameColumnTransformer(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y = None):
         return self
+
+    def __sklearn_is_fitted__(self):
+        # These transformers are stateless - they learn nothing during `fit`
+        # so they are always ready to `transform`. Since scikit-learn 1.6
+        # `Pipeline.transform` enforces `check_is_fitted`, which would
+        # otherwise raise `NotFittedError` when transforming without fitting.
+        return True

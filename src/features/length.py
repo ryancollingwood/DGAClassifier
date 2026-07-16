@@ -12,5 +12,5 @@ def length(series: pd.Series) -> pd.Series:
     :param series: pandas.Series
     :return: pandas.Series
     """
-    return series.astype(str).apply(len)
+    return series.map(str).apply(len)
 

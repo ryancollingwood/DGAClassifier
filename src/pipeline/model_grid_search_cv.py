@@ -31,4 +31,6 @@ def model_grid_search_cv(
         )
     )
 
-    return Pipeline(steps, verbose = verbose)
+    # `GridSearchCV` accepts an integer verbosity level, but since
+    # scikit-learn 1.x `Pipeline.verbose` must be a bool.
+    return Pipeline(steps, verbose = bool(verbose))

@@ -73,10 +73,7 @@ def count_character_pairs_in_column_as_df(
 
     count_windowed = count_vectorizer.fit_transform(series_windowed_corpus)
     
-    try:
-        feature_names = [x for x in count_vectorizer.get_feature_names_out()]
-    except AttributeError:
-        features_names = count_vectorizer.get_feature_names()
+    feature_names = list(count_vectorizer.get_feature_names_out())
 
     result_df = pd.DataFrame(count_windowed.toarray(), columns=feature_names)
 

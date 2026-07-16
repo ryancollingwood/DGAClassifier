@@ -1,7 +1,7 @@
 from typing import Tuple, List
 import numpy as np
-from sklearn.pipeline import FeatureUnion
 
+from src.pipeline.dataframe_feature_union import DataFrameFeatureUnion
 from src.features.transformer import CharacterVarietyRatioTransformer
 from src.features.transformer import CharacterDistanceLeftRightTransformer
 from src.features.transformer import CharacterRatioTransformer
@@ -10,7 +10,7 @@ from src.features.transformer import TextLengthTransformer
 from src.features import mode
 
 
-def feature_generation(columns: List[str]) -> Tuple[str, FeatureUnion]:
+def feature_generation(columns: List[str]) -> Tuple[str, DataFrameFeatureUnion]:
     """
     After having pre-processed our inputs generate the features we're looking to use.
     This is returned as a FeatureUnion which should allow for parallel processing.
@@ -19,7 +19,7 @@ def feature_generation(columns: List[str]) -> Tuple[str, FeatureUnion]:
     """
     return (
         "feature_generation",
-        FeatureUnion([
+        DataFrameFeatureUnion([
             (
                 "digit_ratio",
                 CharacterRatioTransformer(
